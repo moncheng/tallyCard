@@ -27,15 +27,23 @@ public class indexController {
 		return "complete";
 		
 	}
+	@RequestMapping(value="getCard/{cardName}",method=RequestMethod.GET)
+	public String getCard(@PathVariable("cardName") String cardName)
+	{
+		TallyCard card=tallyCards.get(cardName);
+		
+		return card.toString();		
+	}
 	
 	@RequestMapping(value="addCount/{cardName}",method=RequestMethod.GET)
 	public String incrementCardCount(@PathVariable("cardName") String cardName)
 	{
-		TallyCard card;
-		card=tallyCards.get(cardName);
-		return cardName;
+		TallyCard card=tallyCards.get(cardName);
+		card.addCount();
+		return cardName+"'s count increment by 1, now is : "+card.getCount();
 		
 	}
+
 	
 	
 	

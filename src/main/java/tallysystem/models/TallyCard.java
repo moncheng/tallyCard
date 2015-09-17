@@ -37,5 +37,10 @@ public class TallyCard {
 	{
 		return this.dateCreate;
 	}
+	public String toString()
+	{
+		String text="Name: "+this.name+"\nCount: "+this.count+"\nDate Created: "+this.dateCreate;
+		return text;
+	}
 	
 }
