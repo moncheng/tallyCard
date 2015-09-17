@@ -1,7 +1,7 @@
 package tallysystem.controllers;
 
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,18 +15,28 @@ import tallysystem.models.TallyCard;
 public class indexController {
 	
 	//mock data
-	private Map<String,TallyCard> tallyCards;	
-	
+	private HashMap<String,TallyCard> tallyCards= new HashMap<String,TallyCard>();	
 	//end mock data
 	
 	
 	@RequestMapping(value="newCard/{cardName}",method=RequestMethod.GET)
 	public String createNewCard(@PathVariable("cardName") String cardName)
 	{
-		TallyCard card = new TallyCard(cardName);
-		tallyCards.put(cardName,card);
-		return "complete";
+		String returnText="";
+		if(!tallyCards.containsKey(cardName))
+		{
+			TallyCard card = new TallyCard(cardName);
+		    tallyCards.put(cardName,card);
+		    returnText=cardName+" added.";
+		}
+		else
+		{
+			returnText=cardName+" already exist, adding count.\n"+addCount(cardName);
+		}
 		
+		
+		return returnText;
+
 	}
 	@RequestMapping(value="getCard/{cardName}",method=RequestMethod.GET)
 	public String getCard(@PathVariable("cardName") String cardName)
@@ -36,14 +46,14 @@ public class indexController {
 		return card.toString();		
 	}
 	
-	@RequestMapping(value="getAllCard",method=RequestMethod.GET)
-	public String getAllCard()
+	@RequestMapping(value="getAllCards",method=RequestMethod.GET)
+	public String getAllCards()
 	{
-		return getAllCard();		
+		return getAllStringFromMap();		
 	}
 	
 	@RequestMapping(value="addCount/{cardName}",method=RequestMethod.GET)
-	public String incrementCardCount(@PathVariable("cardName") String cardName)
+	public String addCount(@PathVariable("cardName") String cardName)
 	{
 		TallyCard card=tallyCards.get(cardName);
 		card.addCount();
@@ -67,6 +77,14 @@ public class indexController {
 		
 	}
 	
+	@RequestMapping(value="removeAllCards",method=RequestMethod.GET)
+	public String removeAllCards()
+	{
+		tallyCards.clear();
+		return "all cards are removed.";
+		
+	}
+	
 	
 	//helper methods
 	public String getAllStringFromMap()
@@ -75,10 +93,11 @@ public class indexController {
 		String text="";
 		while(iterator.hasNext())
 		{
-			Map.Entry pair = (Map.Entry)iterator.next();
-			text+=pair.toString()+"\n";
-			iterator.remove();
+			HashMap.Entry pair = (HashMap.Entry)iterator.next();
+			text+=pair.getValue().toString()+"\n\n";
 		}
+		if (text=="")
+			text="no cards found.";
 		return text;
 	}
 	

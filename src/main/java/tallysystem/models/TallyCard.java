@@ -10,7 +10,7 @@ public class TallyCard {
 	public TallyCard(String name)
 	{
 		this.name= name;
-		this.count=0;
+		this.count=1;
 		this.dateCreate=new Date();
 	}
 	public String getName()
