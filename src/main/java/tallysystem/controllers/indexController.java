@@ -59,7 +59,13 @@ public class indexController {
 		return cardName+"'s count set to: "+card.getCount();		
 	}
 	
-	
+	@RequestMapping(value="removeCard/{cardName}",method=RequestMethod.GET)
+	public String removeCard(@PathVariable("cardName") String cardName)
+	{
+		tallyCards.remove(cardName);
+		return cardName+" removed.";
+		
+	}
 	
 	
 	//helper methods
