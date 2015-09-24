@@ -18,7 +18,7 @@ public class indexController {
 	private HashMap<String,TallyCard> tallyCards= new HashMap<String,TallyCard>();	
 	//end mock data
 	
-	
+
 	@RequestMapping(value="newCard/{cardName}",method=RequestMethod.GET)
 	public String createNewCard(@PathVariable("cardName") String cardName)
 	{
@@ -39,11 +39,12 @@ public class indexController {
 
 	}
 	@RequestMapping(value="getCard/{cardName}",method=RequestMethod.GET)
-	public String getCard(@PathVariable("cardName") String cardName)
+	public TallyCard getCard(@PathVariable("cardName") String cardName)
 	{
 		TallyCard card=tallyCards.get(cardName);
 		
-		return card.toString();		
+		return card;		
+
 	}
 	
 	@RequestMapping(value="getAllCards",method=RequestMethod.GET)
