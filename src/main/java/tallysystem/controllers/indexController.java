@@ -48,9 +48,9 @@ public class indexController {
 	}
 	
 	@RequestMapping(value="getAllCards",method=RequestMethod.GET)
-	public String getAllCards()
+	public HashMap<String,TallyCard> getAllCards()
 	{
-		return getAllStringFromMap();		
+		return tallyCards;		
 	}
 	
 	@RequestMapping(value="addCount/{cardName}",method=RequestMethod.GET)
