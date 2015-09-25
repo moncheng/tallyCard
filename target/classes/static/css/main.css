@@ -17,9 +17,14 @@
 .counter
 {
 	border-radius:100%;
-	width: 25%;
+	width: 30%;
 	font-size:3em;
-	margin:20% 35%;
+	margin:20% 10% 20% 35%;
+}
+.up
+{
+	font-size:3em;
+	margin-top:25%;
 }
 .fold
 {
@@ -29,11 +34,25 @@
 	left:0;
 	border-width: 40px 40px 0 0;
 	border-style:solid;	
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
 
 }
 
-
-
+.plus
+{	
+	margin-top:30px;
+	color:white;
+	font-size:7em;
+}
+a:hover
+{
+	color:grey;
+	text-decoration: none;
+}
+p
+{
+	margin:0;
+}
 /* **********************colors***************** */
 
 
@@ -73,12 +92,18 @@
 /*---------------fold color-----------*/
 .fold-green
 {
-	border-color: white green;
-	box-shadow: 3px 3px 3px rgba(0,0,0,0.3), 2px 2px 1px rgba(0,0,0,0.2);
+	border-color: white green;	
 }
 
+.fold-lightgreen
+{
+	border-color: white lightgreen;	
+}
 
-
+.fold-medgreen
+{
+	border-color: white #97C02F;	
+}
 
 
 
