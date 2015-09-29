@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="tallyApp">
 <head>
 <meta charset="utf-8">
 <title>Tally System</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<script src="js/controller.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
 
 </head>
-<header>
-	<h1 class="text-center" style="margin-bottom: 60px; color:white">Welcome to
-		Tally System</h1>
-</header>
+<body ng-controller="testController">
+	<header>
+		<h1 class="text-center" style="margin-bottom: 60px; color: white">Welcome
+			to Tally System</h1>
+	</header>
 
-<body>
+	<div ng-repeat="template in templates">
+		<div ng-include="template.url"></div>
+	</div>
+	
+	
 	<div class="container">
 		<div class="row">
 
@@ -30,9 +44,9 @@
 					<p>5</p>
 				</div>
 				<div>
-				<a href="" class="up glyphicon glyphicon-chevron-up"></a>
+					<a href="" class="up glyphicon glyphicon-chevron-up"></a>
 				</div>
-						
+
 			</div>
 
 			<div class="card lightgreen card-color-green col-md-3 ">
@@ -43,15 +57,5 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
