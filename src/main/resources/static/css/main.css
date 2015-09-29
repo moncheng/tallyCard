@@ -8,7 +8,10 @@
 	border-bottom-left-radius: 60%;
 	box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
 }
-
+body
+{
+	 background-color:lightblue;
+}
 .name
 {
 	font-size: 2em;
@@ -92,17 +95,17 @@ p
 /*---------------fold color-----------*/
 .fold-green
 {
-	border-color: white green;	
+	border-color: lightblue green;	
 }
 
 .fold-lightgreen
 {
-	border-color: white lightgreen;	
+	border-color: lightblue lightgreen;	
 }
 
 .fold-medgreen
 {
-	border-color: white #97C02F;	
+	border-color: lightblue #97C02F;	
 }
 
 
