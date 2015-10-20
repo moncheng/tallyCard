@@ -28,11 +28,9 @@
 	</div>
 
 
-	<div class="container">
+	<div id="tallyCardsSection" class="container">
 		<div class="row">
-
 			<div class="col-md-3">
-
 				<div class="card green text-center">
 					<div class="fold fold-green"></div>
 					<a href="" class="plus glyphicon glyphicon-plus"></a>
@@ -40,17 +38,43 @@
 			</div>
 
 			<div class="col-md-3">
+				<div class="card lightgreen">
+					<div class="row col-md-11">
+						<div class="fold fold-lightgreen"></div>
+						<div class="name text-white text-center">Swift</div>
+					</div>
+					<div class="col-md-12">
+						<div class="col-md-4">
+							<a href="" class="arrow up glyphicon glyphicon-chevron-up"></a>
+						</div>
+						<div class="col-md-4 counter white text-center ">
+							<p>3</p>
+						</div>
+						<div class="col-md-4 ">
+							<a href="" class="arrow down glyphicon glyphicon-chevron-down"></a>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="pull-right">
+							<a href="" class="trash glyphicon glyphicon-trash"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-repeat="tallyCard in tallyCards">
+				<div class="col-md-3">
 					<div class="card lightgreen">
 						<div class="row col-md-11">
 							<div class="fold fold-lightgreen"></div>
-							<div class="name text-white text-center">Swift</div>
+							<div class="name text-white text-center">{{tallyCard.name}}</div>
 						</div>
 						<div class="col-md-12">
 							<div class="col-md-4">
 								<a href="" class="arrow up glyphicon glyphicon-chevron-up"></a>
 							</div>
 							<div class="col-md-4 counter white text-center ">
-								<p>3</p>
+								<p>{{tallyCard.count}}</p>
 							</div>
 							<div class="col-md-4 ">
 								<a href="" class="arrow down glyphicon glyphicon-chevron-down"></a>
@@ -61,17 +85,9 @@
 								<a href="" class="trash glyphicon glyphicon-trash"></a>
 							</div>
 						</div>
-					</div>				
+					</div>
+				</div>
 			</div>
-			
-
-
-
-
-
-
-
-
 
 		</div>
 	</div>
