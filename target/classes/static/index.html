@@ -9,6 +9,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 <script src="js/controller.js"></script>
+<script src="js/directives.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -17,7 +18,7 @@
 <script src="js/bootstrap.min.js"></script>
 
 </head>
-<body ng-controller="testController">
+<body ng-controller="CardController">
 	<header>
 		<h1 class="text-center" style="margin-bottom: 60px; color: white">Welcome
 			to Tally System</h1>
@@ -63,33 +64,14 @@
 			</div>
 
 			<div ng-repeat="tallyCard in tallyCards">
-				<div class="col-md-3">
-					<div class="card lightgreen">
-						<div class="row col-md-11">
-							<div class="fold fold-lightgreen"></div>
-							<div class="name text-white text-center">{{tallyCard.name}}</div>
-						</div>
-						<div class="col-md-12">
-							<div class="col-md-4">
-								<a href="" class="arrow up glyphicon glyphicon-chevron-up"></a>
-							</div>
-							<div class="col-md-4 counter white text-center ">
-								<p>{{tallyCard.count}}</p>
-							</div>
-							<div class="col-md-4 ">
-								<a href="" class="arrow down glyphicon glyphicon-chevron-down"></a>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="pull-right">
-								<a href="" class="trash glyphicon glyphicon-trash"></a>
-							</div>
-						</div>
-					</div>
-				</div>
+				<tally-card-model ng-model="tallyCard" />
 			</div>
 
 		</div>
 	</div>
 </body>
+	
+
+
+
 </html>
