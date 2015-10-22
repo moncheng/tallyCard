@@ -3,15 +3,27 @@ tallyApp.directive('tallyCardModel', function() {
 		scope : {
 			tallyCard : '=ngModel'
 		},
-		controller : function($scope, $element) {
+		controller : function($scope, $element,$http) {
 			$scope.countUp = function() {
-				$scope.tallyCard.count++
+				var count=++$scope.tallyCard.count
 				// TODO Add call to Service to Push Update
+				$http.get('http://localhost:8080/updateCount/'+$scope.tallyCard.name+'/'
+						+count)
 			}
 			$scope.countDown = function() {
-				$scope.tallyCard.count--
+				var count=--$scope.tallyCard.count
+				$http.get('http://localhost:8080/updateCount/'+$scope.tallyCard.name+'/'
+						+count)
 				// TODO Add call to Service to Push Update
 			}
+			$scope.delete = function() {
+				var name=$scope.tallyCard.name
+				$element.empty()
+				$http.get('http://localhost:8080/removeCard/'+name)
+				
+				// TODO Add call to Service to Push Update
+			}
+			
 		},
 		templateUrl : '/html/Card.html'
 	};

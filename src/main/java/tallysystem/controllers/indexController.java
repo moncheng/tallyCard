@@ -22,24 +22,14 @@ public class indexController {
 	// end mock data
 
 	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.GET)
-	public String createNewCard(@PathVariable("cardName") String cardName) {
-		String returnText = "";
-		if (!tallyCards.containsKey(cardName)) {
-			TallyCard card = new TallyCard(cardName);
-			tallyCards.put(cardName, card);
-			returnText = cardName + " added.";
-		} else {
-			returnText = cardName + " already exist, adding count.\n" + addCount(cardName);
-		}
-
-		return returnText;
-
+	public void createNewCard(@PathVariable("cardName") String cardName) {
+		TallyCard card = new TallyCard(cardName);
+		tallyCards.put(cardName, card);
 	}
 
 	@RequestMapping(value = "getCard/{cardName}", method = RequestMethod.GET)
 	public TallyCard getCard(@PathVariable("cardName") String cardName) {
 		TallyCard card = tallyCards.get(cardName);
-
 		return card;
 
 	}
@@ -51,9 +41,9 @@ public class indexController {
 	}
 
 	@RequestMapping(value = "updateCount/{cardName}/{count}", method = RequestMethod.GET)
-	public void setCardCount(@PathVariable("cardName") String cardName, @PathVariable("count") int count) {
+	public void setCardCount(@PathVariable("cardName") String cardName, @PathVariable("count") String count) {
 		TallyCard card = tallyCards.get(cardName);
-		card.setCount(count);
+		card.setCount(Integer.parseInt(count));
 
 	}
 
