@@ -7,6 +7,7 @@ public class TallyCard {
 	private String name;
 	private int count;
 	private Date dateCreate;
+	
 	public TallyCard(String name)
 	{
 		this.name= name;
