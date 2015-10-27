@@ -23,29 +23,30 @@
 		<h1 class="text-center" style="margin-bottom: 60px; color: white">Welcome
 			to Tally System</h1>
 	</header>
-
-	<div ng-repeat="template in templates">
-		<div ng-include="template.url"></div>
-	</div>
-
-
-	<div id="tallyCardsSection" class="container" ng-controller="CardController">
+	<div id="tallyCardsSection" class="container"
+		ng-controller="CardController">
 		<div class="row">
 			<div class="col-md-3">
 				<div class="card green text-center">
 					<div class="fold fold-green"></div>
-					<a href="" class="plus glyphicon glyphicon-plus"></a>
+					<div class="no-padding col-md-12">
+						<div class="name text-white col-md-3">
+							Name:
+						</div>
+						<div class="col-md-9">
+							<input ng-model="newName" type="text" placeholder="Enter a name for new card"></input>
+						</div>
+					</div>
+					<a href="" class="plus glyphicon glyphicon-plus" ng-click="addCard()"></a>
 				</div>
 			</div>
-
 			<div ng-repeat="tallyCard in tallyCards">
 				<tally-card-model ng-model="tallyCard" />
 			</div>
-
 		</div>
 	</div>
 </body>
-	
+
 
 
 

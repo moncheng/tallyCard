@@ -19,11 +19,9 @@ tallyApp.directive('tallyCardModel', function() {
 			$scope.delete = function() {
 				var name=$scope.tallyCard.name
 				$element.empty()
-				$http.get('http://localhost:8080/removeCard/'+name)
-				
-				// TODO Add call to Service to Push Update
+				$http.delete('http://localhost:8080/removeCard/'+name)
 			}
-			
+
 		},
 		templateUrl : '/html/Card.html'
 	};

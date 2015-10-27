@@ -21,7 +21,7 @@ public class indexController {
 	private HashMap<String, TallyCard> tallyCards = cardService.makeCards();
 	// end mock data
 
-	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.GET)
+	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.POST)
 	public void createNewCard(@PathVariable("cardName") String cardName) {
 		TallyCard card = new TallyCard(cardName);
 		tallyCards.put(cardName, card);
@@ -47,7 +47,7 @@ public class indexController {
 
 	}
 
-	@RequestMapping(value = "removeCard/{cardName}", method = RequestMethod.GET)
+	@RequestMapping(value = "removeCard/{cardName}", method = RequestMethod.DELETE)
 	public String removeCard(@PathVariable("cardName") String cardName) {
 		tallyCards.remove(cardName);
 		return cardName + " removed.";

@@ -10,8 +10,17 @@ body
 	 background-color:lightblue;
 	 padding:2%;
 }
-.name
+input
 {
+	margin:5%;
+}
+.no-padding
+{
+	padding:0;
+}
+.name
+{	
+	padding-top:2%;
 	font-size: 1.3em;
 	font-weight:bold;
 }
@@ -48,10 +57,10 @@ body
 
 .plus
 {	
-	margin-top:30px;
 	color:white;
-	font-size:7em;
+	font-size:3em;
 }
+
 a:hover
 {
 	color:grey;
