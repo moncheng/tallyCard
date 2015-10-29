@@ -32,7 +32,7 @@ public class TallyCardService {
 						  ,"CEO","CIO","CFO","COO","CSO","Baker","Chef","Maker"};
 
 		//all for work
-		cards=addCardsToMap(cards,"Work for ",skills);
+		cards=addCardsToMap(cards,"Work on ",skills);
 		cards=addCardsToMap(cards,"Work at ",typeLoc);
 		cards=addCardsToMap(cards,"Learn ",skills);
 		cards=addCardsToMap(cards,"Study for ",studyFor);
