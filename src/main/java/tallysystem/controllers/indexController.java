@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,28 +20,26 @@ import tallysystem.services.TallyCardService;
 @RequestMapping(value = "/")
 public class indexController {
 
-	TallyCardService cardService = new TallyCardService();
+
 	@Autowired 
 	private TallyCardService cardsService;
 	
-	private HashMap<String, TallyCard> tallyCards = cardService.makeCards();
 	// end mock data
 
 	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.POST)
-	public void createNewCard(@PathVariable("cardName") String cardName) {
-		TallyCard card = new TallyCard(cardName);
+	public ResponseEntity<TallyCard> createNewCard(@PathVariable("cardName") String cardName) {
+		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
+		TallyCard card = new TallyCard();
+		card.setName(cardName);
 		tallyCards.put(cardName, card);
 		cardsService.saveCard(card);
-	}
-	
-	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.GET)
-	public void insertNewCard(@PathVariable("cardName") String cardName) {
-		TallyCard card = new TallyCard(cardName);
-		cardsService.saveCard(card);
+		
+		return new ResponseEntity<TallyCard>(card, new HttpHeaders(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "getCard/{cardName}", method = RequestMethod.GET)
 	public TallyCard getCard(@PathVariable("cardName") String cardName) {
+		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
 		TallyCard card = tallyCards.get(cardName);
 		return card;
 
@@ -47,11 +48,12 @@ public class indexController {
 	@RequestMapping(value = "getAllCards", method = RequestMethod.GET)
 	public Collection<TallyCard> getAllCards() {
 
-		return tallyCards.values();
+		return cardsService.getAllCards();
 	}
 
 	@RequestMapping(value = "updateCount/{cardName}/{count}", method = RequestMethod.GET)
 	public void setCardCount(@PathVariable("cardName") String cardName, @PathVariable("count") String count) {
+		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
 		TallyCard card = tallyCards.get(cardName);
 		card.setCount(Integer.parseInt(count));
 
@@ -59,6 +61,7 @@ public class indexController {
 
 	@RequestMapping(value = "removeCard/{cardName}", method = RequestMethod.DELETE)
 	public String removeCard(@PathVariable("cardName") String cardName) {
+		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
 		tallyCards.remove(cardName);
 		return cardName + " removed.";
 
@@ -66,6 +69,7 @@ public class indexController {
 
 	@RequestMapping(value = "removeAllCards", method = RequestMethod.GET)
 	public String removeAllCards() {
+		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
 		tallyCards.clear();
 		return "all cards are removed.";
 
@@ -73,7 +77,8 @@ public class indexController {
 
 	// helper methods
 	public String getAllStringFromMap() {
-		Iterator iterator = this.tallyCards.entrySet().iterator();
+		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
+		Iterator iterator = tallyCards.entrySet().iterator();
 		String text = "";
 		while (iterator.hasNext()) {
 			HashMap.Entry pair = (HashMap.Entry) iterator.next();

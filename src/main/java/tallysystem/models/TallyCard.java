@@ -1,23 +1,24 @@
 package tallysystem.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-public class TallyCard {
+@Document
+public class TallyCard implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3605640855256691387L;
 	@Id
 	private String id;
 	private String name;
 	private int count;
 	private Date dateCreate;
 	
-	public TallyCard(String name)
-	{
-		this.name= name;
-		this.count=1;
-		this.dateCreate=new Date();
-	}
+
 	public String getName()
 	{
 		return this.name;

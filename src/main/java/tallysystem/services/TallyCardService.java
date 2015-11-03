@@ -1,6 +1,7 @@
 package tallysystem.services;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -16,26 +17,37 @@ public class TallyCardService {
 	@Autowired
 	private MongoOperations mongoOperations;
 
+//	public void createCard(TallyCard card) {
+//		 cardRepository.saveCard(card);
+//	}
 	public TallyCard getCardByName(String name) {
 		Query query = createQuery("name", name);
-		return getCard(query);
+		return getCard(query).get(0);
 	}
+	public void removeCardByName(String name){
+		Query query = createQuery("name",name);
+		removeCard(query);
+	}
+
 	public Query createQuery(String column, String name) {
 		return new Query(Criteria.where(column).is(name));
 	}
+	
 	public void saveCard(TallyCard card) {
 		mongoOperations.save(card);
 	}
-	public void removeCard(TallyCard card) {
-
+	public void removeCard(Query query) {
+		mongoOperations.findAndRemove(query, TallyCard.class);
 	}
-	public TallyCard getCard(Query query) {
-		return (TallyCard) mongoOperations.find(query, TallyCard.class);
-
+	public List<TallyCard> getCard(Query query) {
+		return  mongoOperations.find(query, TallyCard.class);
 	}
-	public void getAllCard(TallyCard card) {
-
+	public List<TallyCard> getAllCards() {
+		List<TallyCard> cards=mongoOperations.findAll(TallyCard.class);
+		System.out.println("------------------\n"+cards.isEmpty()+"\n----------------------");
+		return cards;
 	}
+	
 	public HashMap<String, TallyCard> makeCards() {
 		HashMap<String, TallyCard> cards = new HashMap<String, TallyCard>();
 
@@ -78,7 +90,8 @@ public class TallyCardService {
 
 		for (String x : array) {
 			String name = preText + x;
-			TallyCard card = new TallyCard(name);
+			TallyCard card = new TallyCard();
+			card.setName(name);
 			cards.put(name, card);
 		}
 		return cards;
