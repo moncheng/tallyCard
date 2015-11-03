@@ -8,7 +8,7 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 	$scope.addCard = function() {
 		$http.post('http://localhost:8080/newCard/' + $scope.newName).
 			success(function(data, status, headers, config) {
-				return $scope.tallyCards.push(data);
+				return $scope.tallyCards.unshift(data);
 			});
 	
 		alert("card added")
