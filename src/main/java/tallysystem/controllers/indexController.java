@@ -28,13 +28,13 @@ public class indexController {
 	public void createNewCard(@PathVariable("cardName") String cardName) {
 		TallyCard card = new TallyCard(cardName);
 		tallyCards.put(cardName, card);
-		cardsService.createCard(card);
+		cardsService.saveCard(card);
 	}
 	
 	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.GET)
 	public void insertNewCard(@PathVariable("cardName") String cardName) {
 		TallyCard card = new TallyCard(cardName);
-		cardsService.createCard(card);
+		cardsService.saveCard(card);
 	}
 
 	@RequestMapping(value = "getCard/{cardName}", method = RequestMethod.GET)
