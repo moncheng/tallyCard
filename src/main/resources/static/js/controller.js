@@ -15,5 +15,20 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		$scope.newName="";
 
 	}
+	$scope.orderBy=function(columnOn,rev,id)
+	{
+		if($scope.column===columnOn && $scope.reverse===rev)
+			$scope.column=""
+		else
+			$scope.column=columnOn
+		
+	    $scope.reverse=rev;
+		
+		if($("#"+id).hasClass('btn-sort-on')===true)
+			$("#"+id).removeClass('btn-sort-on')
+		else
+			$("#"+id).addClass('btn-sort-on')
+		
+	}
 
 });
