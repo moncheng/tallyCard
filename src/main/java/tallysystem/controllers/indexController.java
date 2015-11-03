@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,9 @@ import tallysystem.services.TallyCardService;
 public class indexController {
 
 	TallyCardService cardService = new TallyCardService();
-
+	@Autowired 
+	private TallyCardService cardsService;
+	
 	private HashMap<String, TallyCard> tallyCards = cardService.makeCards();
 	// end mock data
 
@@ -25,6 +28,13 @@ public class indexController {
 	public void createNewCard(@PathVariable("cardName") String cardName) {
 		TallyCard card = new TallyCard(cardName);
 		tallyCards.put(cardName, card);
+		cardsService.createCard(card);
+	}
+	
+	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.GET)
+	public void insertNewCard(@PathVariable("cardName") String cardName) {
+		TallyCard card = new TallyCard(cardName);
+		cardsService.createCard(card);
 	}
 
 	@RequestMapping(value = "getCard/{cardName}", method = RequestMethod.GET)

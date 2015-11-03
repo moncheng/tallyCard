@@ -2,8 +2,12 @@ package tallysystem.models;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 public class TallyCard {
-	
+	@Id
+	private String id;
 	private String name;
 	private int count;
 	private Date dateCreate;

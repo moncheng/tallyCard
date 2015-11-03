@@ -2,12 +2,22 @@ package tallysystem.services;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Service;
+
 import tallysystem.models.TallyCard;
 
+@Service
 public class TallyCardService {
 	
+	@Autowired
+	private MongoOperations mongoOperations;
 	
-	
+	public void createCard(TallyCard card)
+	{
+		mongoOperations.insert(card);
+	}
 	
 	public HashMap<String,TallyCard> makeCards()
 	{
