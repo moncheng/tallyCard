@@ -41,10 +41,9 @@ public class indexController {
 
 	@RequestMapping(value = "updateCount/{cardName}/{count}", method = RequestMethod.GET)
 	public void setCardCount(@PathVariable("cardName") String cardName, @PathVariable("count") String count) {
-		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
-		TallyCard card = tallyCards.get(cardName);
+		TallyCard card = cardsService.getCardByName(cardName);
 		card.setCount(Integer.parseInt(count));
-
+		cardsService.saveCard(card);
 	}
 
 	@RequestMapping(value = "removeCard/{cardName}", method = RequestMethod.DELETE)
