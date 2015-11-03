@@ -28,26 +28,14 @@ public class indexController {
 
 	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.POST)
 	public ResponseEntity<TallyCard> createNewCard(@PathVariable("cardName") String cardName) {
-		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
 		TallyCard card = new TallyCard();
 		card.setName(cardName);
-		tallyCards.put(cardName, card);
 		cardsService.saveCard(card);
-		
 		return new ResponseEntity<TallyCard>(card, new HttpHeaders(), HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "getCard/{cardName}", method = RequestMethod.GET)
-	public TallyCard getCard(@PathVariable("cardName") String cardName) {
-		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
-		TallyCard card = tallyCards.get(cardName);
-		return card;
-
 	}
 
 	@RequestMapping(value = "getAllCards", method = RequestMethod.GET)
 	public Collection<TallyCard> getAllCards() {
-
 		return cardsService.getAllCards();
 	}
 
@@ -60,33 +48,9 @@ public class indexController {
 	}
 
 	@RequestMapping(value = "removeCard/{cardName}", method = RequestMethod.DELETE)
-	public String removeCard(@PathVariable("cardName") String cardName) {
-		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
-		tallyCards.remove(cardName);
-		return cardName + " removed.";
-
+	public void removeCard(@PathVariable("cardName") String cardName) {
+		cardsService.removeCardByName(cardName);
 	}
 
-	@RequestMapping(value = "removeAllCards", method = RequestMethod.GET)
-	public String removeAllCards() {
-		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
-		tallyCards.clear();
-		return "all cards are removed.";
-
-	}
-
-	// helper methods
-	public String getAllStringFromMap() {
-		HashMap<String, TallyCard> tallyCards = cardsService.makeCards();
-		Iterator iterator = tallyCards.entrySet().iterator();
-		String text = "";
-		while (iterator.hasNext()) {
-			HashMap.Entry pair = (HashMap.Entry) iterator.next();
-			text += pair.getValue().toString() + "\n\n";
-		}
-		if (text == "")
-			text = "no cards found.";
-		return text;
-	}
 
 }
