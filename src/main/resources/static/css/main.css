@@ -14,6 +14,16 @@ input
 {
 	margin:5%;
 }
+.stringInput
+{
+	width:30%;
+	margin:0;
+}
+.numInput
+{
+	width:10%;
+	margin:0;
+}
 .no-padding
 {
 	padding:0;

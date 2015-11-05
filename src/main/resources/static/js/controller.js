@@ -15,14 +15,24 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		$scope.newName = "";
 
 	}
+	$scope.search = function(){
+		$scope.searchText = $("#searchName").val();
+	}
+	$scope.clearSearch= function()
+	{
+		$scope.searchText = "";
+		$("#searchName").val("");
 
+	}
 	$scope.orderBy = function(columnOn, sortBtnId, groupId) {
 
-		if ($scope.primary === '' || $scope.primary ==null || $scope.primary === 'dateCreate') {
+		if ($scope.primary === '' || $scope.primary == null
+				|| $scope.primary === 'dateCreate') {
 			$scope.primary = columnOn;
 			switchSort(sortBtnId, groupId);
 		} else {
-			if ( ($scope.primary.indexOf(groupId.substring(0,groupId.length-1))) >-1) {
+			if (($scope.primary.indexOf(groupId
+					.substring(0, groupId.length - 1))) > -1) {
 				if ($scope.primary === columnOn) {
 					$scope.primary = "dateCreate";
 				} else {
@@ -41,6 +51,7 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		}
 
 	}
+
 
 });
 

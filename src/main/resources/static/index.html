@@ -27,6 +27,7 @@
 	<div id="tallyCardsSection" class="container"
 		ng-controller="CardController">
 		<div id="sortBtnSection" class="row">
+		<div class=col-md-1></div>
 			<div id="counts" class="col-md-2">
 				<button id="sort-by-counts-up"
 					ng-click="orderBy('count','sort-by-counts-up','counts')">
@@ -47,6 +48,17 @@
 					Name <span class="glyphicon glyphicon-chevron-down"></span>
 				</button>
 			</div>
+			<div class="col-md-3">
+				Search: <input id="searchName"class="stringInput" ></input>
+				<button id="searchSubmit" ng-click='search()'>Submit</button>
+				<button id="searchClear" ng-click='clearSearch()'>Clear</button>
+			</div>
+			<div class="col-md-4">
+				Filter Count From : <input class="numInput" id="minCount"></input>
+				To:  <input class="numInput" id="maxCount"></input>
+				<button id="countFilterSubmit">Submit</button>
+				<button id="countFilterClear">Clear</button>
+			</div>
 		</div>
 
 		<div class="row">
@@ -65,7 +77,9 @@
 						ng-click="addCard()"></a>
 				</div>
 			</div>
-			<div ng-repeat="tallyCard in tallyCards | orderBy:[primary,secondary]">
+			<div
+				ng-repeat="tallyCard in tallyCards | orderBy:[primary,secondary]
+						   | filter:{name:searchText}">
 				<tally-card-model ng-model="tallyCard" />
 			</div>
 		</div>
