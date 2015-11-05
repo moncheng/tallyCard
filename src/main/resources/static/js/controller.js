@@ -15,21 +15,43 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		$scope.newName = "";
 
 	}
-	$scope.orderBy = function(columnOn, rev, id) {
-		if ($scope.column === columnOn && $scope.reverse === rev) {
-			$scope.column = "dateCreate";//need a default sortting(most recent updated or created)
-			$scope.reverse = "";
-		} else
-			{
-			$scope.column = columnOn;
-			$scope.reverse = rev;
-			}
 
-		if ($("#" + id).hasClass('btn-sort-on') === true)
-			$("#" + id).removeClass('btn-sort-on');
-		else
-			$("#" + id).addClass('btn-sort-on');
+	$scope.orderBy = function(columnOn, sortBtnId, groupId) {
+
+		if ($scope.primary === '' || $scope.primary ==null || $scope.primary === 'dateCreate') {
+			$scope.primary = columnOn;
+			switchSort(sortBtnId, groupId);
+		} else {
+			if ( ($scope.primary.indexOf(groupId.substring(0,groupId.length-1))) >-1) {
+				if ($scope.primary === columnOn) {
+					$scope.primary = "dateCreate";
+				} else {
+					$scope.primary = columnOn;
+				}
+				switchSort(sortBtnId, groupId);
+
+			} else {
+				if ($scope.secondary === columnOn) {
+					$scope.secondary = "dateCreate";
+				} else {
+					$scope.secondary = columnOn;
+				}
+				switchSort(sortBtnId, groupId);
+			}
+		}
 
 	}
 
 });
+
+function switchSort(id, groupId) {
+
+	if ($("#" + id).hasClass('btn-sort-on') === true)
+		$("#" + id).removeClass('btn-sort-on');
+	else {
+		$("#" + groupId).children().removeClass('btn-sort-on');
+		$("#" + id).addClass('btn-sort-on');
+		$("#" + id).addClass('btn-sort-on');
+	}
+
+}

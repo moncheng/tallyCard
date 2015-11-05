@@ -26,14 +26,29 @@
 
 	<div id="tallyCardsSection" class="container"
 		ng-controller="CardController">
-		<div>
-			<button id="sort-by-count-up" ng-click="orderBy('count',false,'sort-by-count-up')">
-				count <span class="glyphicon glyphicon-chevron-up"></span>
-			</button>
-			<button id="sort-by-count-down" ng-click="orderBy('count',true,'sort-by-count-down')">
-				count <span class="glyphicon glyphicon-chevron-down"></span>
-			</button>
+		<div id="sortBtnSection" class="row">
+			<div id="counts" class="col-md-2">
+				<button id="sort-by-counts-up"
+					ng-click="orderBy('count','sort-by-counts-up','counts')">
+					Count <span class="glyphicon glyphicon-chevron-up"></span>
+				</button>
+				<button id="sort-by-counts-down"
+					ng-click="orderBy('-count','sort-by-counts-down','counts')">
+					Count <span class="glyphicon glyphicon-chevron-down"></span>
+				</button>
+			</div>
+			<div id="names" class="col-md-2">
+				<button id="sort-by-names-up"
+					ng-click="orderBy('name','sort-by-names-up','names')">
+					Name <span class="glyphicon glyphicon-chevron-up"></span>
+				</button>
+				<button id="sort-by-names-down"
+					ng-click="orderBy('-name','sort-by-names-down','names')">
+					Name <span class="glyphicon glyphicon-chevron-down"></span>
+				</button>
+			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="card green text-center">
@@ -50,7 +65,7 @@
 						ng-click="addCard()"></a>
 				</div>
 			</div>
-			<div ng-repeat="tallyCard in tallyCards | orderBy:column:reverse">
+			<div ng-repeat="tallyCard in tallyCards | orderBy:[primary,secondary]">
 				<tally-card-model ng-model="tallyCard" />
 			</div>
 		</div>
