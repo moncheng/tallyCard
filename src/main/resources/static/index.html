@@ -56,8 +56,8 @@
 			<div class="col-md-4">
 				Filter Count From : <input class="numInput" id="minCount"></input>
 				To:  <input class="numInput" id="maxCount"></input>
-				<button id="countFilterSubmit">Submit</button>
-				<button id="countFilterClear">Clear</button>
+				<button id="countFilterSubmit" ng-click="submitCountRange()">Submit</button>
+				<button id="countFilterClear" ng-click="clearCountFliter()">Clear</button>
 			</div>
 		</div>
 
@@ -79,7 +79,7 @@
 			</div>
 			<div
 				ng-repeat="tallyCard in tallyCards | orderBy:[primary,secondary]
-						   | filter:{name:searchText}">
+						   | filter:{name:searchText} | filter:filterCount">
 				<tally-card-model ng-model="tallyCard" />
 			</div>
 		</div>

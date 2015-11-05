@@ -1,4 +1,6 @@
 var tallyApp = angular.module('tallyApp', []);
+var minCount = 0;
+var maxCount = Number.MAX_VALUE;
 
 tallyApp.controller('CardController', function($scope, $element, $http) {
 
@@ -15,14 +17,34 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		$scope.newName = "";
 
 	}
-	$scope.search = function(){
+	$scope.search = function() {
 		$scope.searchText = $("#searchName").val();
 	}
-	$scope.clearSearch= function()
-	{
+	$scope.clearSearch = function() {
 		$scope.searchText = "";
 		$("#searchName").val("");
 
+	}
+	$scope.submitCountRange = function() {
+
+		if ($("#minCount").val() === "")
+			minCount = 0;
+		else
+			minCount = parseInt($("#minCount").val());
+		if ($("#maxCount").val() == "")
+			maxCount = Number.MAX_VALUE;
+		else
+			maxCount = parseInt($("#maxCount").val());
+	}
+	$scope.clearCountFliter = function() {
+		minCount = 0;
+		maxCount = Number.MAX_VALUE;
+		$("#minCount").val("");
+		$("#maxCount").val("");
+	}
+
+	$scope.filterCount = function(tallyCard) {
+		return (tallyCard.count >= minCount && tallyCard.count <= maxCount);
 	}
 	$scope.orderBy = function(columnOn, sortBtnId, groupId) {
 
@@ -51,7 +73,6 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		}
 
 	}
-
 
 });
 
