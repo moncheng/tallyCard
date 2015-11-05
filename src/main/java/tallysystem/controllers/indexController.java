@@ -28,8 +28,7 @@ public class indexController {
 
 	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.POST)
 	public ResponseEntity<TallyCard> createNewCard(@PathVariable("cardName") String cardName) {
-		TallyCard card = new TallyCard();
-		card.setName(cardName);
+		TallyCard card = new TallyCard(cardName);
 		cardsService.saveCard(card);
 		return new ResponseEntity<TallyCard>(card, new HttpHeaders(), HttpStatus.OK);
 	}

@@ -18,7 +18,12 @@ public class TallyCard implements Serializable{
 	private int count;
 	private Date dateCreate;
 	
-
+	public TallyCard(String name)
+	{
+		this.name=name;
+		this.dateCreate=new Date();
+		this.count=0;
+	}
 	public String getName()
 	{
 		return this.name;
@@ -43,6 +48,7 @@ public class TallyCard implements Serializable{
 	{
 		return this.dateCreate;
 	}
+
 	public String toString()
 	{
 		String text="Name: "+this.name+"\nCount: "+this.count+"\nDate Created: "+this.dateCreate;
