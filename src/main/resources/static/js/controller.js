@@ -6,17 +6,21 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 
 	$http.get('http://localhost:8080/getAllCards').then(function(resp) {
 		$scope.tallyCards = resp.data;
+		$scope.created = 'dateCreate';
+		$scope.reverse = true;
 	})
+
 	$scope.addCard = function() {
 		$http.post('http://localhost:8080/newCard/' + $scope.newName).success(
 				function(data, status, headers, config) {
-					return $scope.tallyCards.unshift(data);
+					return $scope.tallyCards.push(data);
 				});
 
 		alert("card added")
 		$scope.newName = "";
 
 	}
+
 	$scope.search = function() {
 		$scope.searchText = $("#searchName").val();
 	}
@@ -47,31 +51,54 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 		return (tallyCard.count >= minCount && tallyCard.count <= maxCount);
 	}
 	$scope.orderBy = function(columnOn, sortBtnId, groupId) {
-
-		if ($scope.primary === '' || $scope.primary == null
-				|| $scope.primary === 'dateCreate') {
-			$scope.primary = columnOn;
-			switchSort(sortBtnId, groupId);
-		} else {
-			if (($scope.primary.indexOf(groupId
-					.substring(0, groupId.length - 1))) > -1) {
-				if ($scope.primary === columnOn) {
-					$scope.primary = "dateCreate";
-				} else {
-					$scope.primary = columnOn;
-				}
-				switchSort(sortBtnId, groupId);
-
+		if (columnOn === "created") {
+			if ($('#by-created-arrow').hasClass('glyphicon-chevron-down')) {
+				$('#by-created-arrow').removeClass('glyphicon-chevron-down');
+				$('#by-created-arrow').addClass('glyphicon-chevron-up');
+				$scope.reverse = false;
 			} else {
-				if ($scope.secondary === columnOn) {
-					$scope.secondary = "dateCreate";
-				} else {
-					$scope.secondary = columnOn;
-				}
+				$('#by-created-arrow').removeClass('glyphicon-chevron-up');
+				$('#by-created-arrow').addClass('glyphicon-chevron-down');
+				$scope.reverse = true;
+			}
+		} else {
+			if ($scope.primary === '' || $scope.primary == null) {
+				$scope.primary = columnOn;
 				switchSort(sortBtnId, groupId);
+			} else {
+				// check if the column contain group id without s
+				if (($scope.primary.indexOf(groupId.substring(0,
+						groupId.length - 1))) > -1) {
+					if ($scope.primary === columnOn) {
+						$scope.primary = "";
+						if ($scope.secondary != '') {
+							$scope.primary = $scope.secondary;
+							$scope.secondary = '';
+						}
+					} else {
+						$scope.primary = columnOn;
+					}
+					switchSort(sortBtnId, groupId);
+				} else {
+					if ($scope.secondary === columnOn) {
+						$scope.secondary = "";
+
+					} else {
+						$scope.secondary = columnOn;
+					}
+					switchSort(sortBtnId, groupId);
+				}
 			}
 		}
-
+		// check if other sorts btn other than created are on, if so off create,
+		// otherwise create on
+		var isCountsOn = $("#counts").children().hasClass('btn-sort-on');
+		var isNamesOn = $("#names").children().hasClass('btn-sort-on');
+		if (isCountsOn === true || isNamesOn === true) {
+			$("#sort-by-created").removeClass('btn-sort-on');
+		} else {
+			$("#sort-by-created").addClass('btn-sort-on');
+		}
 	}
 
 });

@@ -27,37 +27,42 @@
 	<div id="tallyCardsSection" class="container"
 		ng-controller="CardController">
 		<div id="sortBtnSection" class="row">
-		<div class=col-md-1></div>
+			<div id="creates" class="col-md-1 no-padding">
+				<button class="sort-btn created-down btn-sort-on" id="sort-by-created"
+					ng-click="orderBy('created','sort-by-created','creates')">
+					Created <span id="by-created-arrow"class="glyphicon glyphicon-chevron-down"></span>
+				</button>
+			</div>
 			<div id="counts" class="col-md-2">
-				<button id="sort-by-counts-up"
+				<button  class="sort-btn" id="sort-by-counts-up"
 					ng-click="orderBy('count','sort-by-counts-up','counts')">
 					Count <span class="glyphicon glyphicon-chevron-up"></span>
 				</button>
-				<button id="sort-by-counts-down"
+				<button class="sort-btn" id="sort-by-counts-down"
 					ng-click="orderBy('-count','sort-by-counts-down','counts')">
 					Count <span class="glyphicon glyphicon-chevron-down"></span>
 				</button>
 			</div>
 			<div id="names" class="col-md-2">
-				<button id="sort-by-names-up"
+				<button class="sort-btn" id="sort-by-names-up"
 					ng-click="orderBy('name','sort-by-names-up','names')">
 					Name <span class="glyphicon glyphicon-chevron-up"></span>
 				</button>
-				<button id="sort-by-names-down"
+				<button class="sort-btn" id="sort-by-names-down"
 					ng-click="orderBy('-name','sort-by-names-down','names')">
 					Name <span class="glyphicon glyphicon-chevron-down"></span>
 				</button>
 			</div>
 			<div class="col-md-3">
-				Search: <input id="searchName"class="stringInput" ></input>
-				<button id="searchSubmit" ng-click='search()'>Submit</button>
-				<button id="searchClear" ng-click='clearSearch()'>Clear</button>
+				Search: <input id="searchName" class="stringInput"></input>
+				<button class="sort-btn" id="searchSubmit" ng-click='search()'>Submit</button>
+				<button class="sort-btn" id="searchClear" ng-click='clearSearch()'>Clear</button>
 			</div>
 			<div class="col-md-4">
 				Filter Count From : <input class="numInput" id="minCount"></input>
-				To:  <input class="numInput" id="maxCount"></input>
-				<button id="countFilterSubmit" ng-click="submitCountRange()">Submit</button>
-				<button id="countFilterClear" ng-click="clearCountFliter()">Clear</button>
+				To: <input class="numInput" id="maxCount"></input>
+				<button class="sort-btn" id="countFilterSubmit" ng-click="submitCountRange()">Submit</button>
+				<button class="sort-btn" id="countFilterClear" ng-click="clearCountFliter()">Clear</button>
 			</div>
 		</div>
 
@@ -78,7 +83,7 @@
 				</div>
 			</div>
 			<div
-				ng-repeat="tallyCard in tallyCards | orderBy:[primary,secondary]
+				ng-repeat="tallyCard in tallyCards | orderBy:created:reverse | orderBy:[primary,secondary]
 						   | filter:{name:searchText} | filter:filterCount">
 				<tally-card-model ng-model="tallyCard" />
 			</div>
