@@ -42,6 +42,7 @@ public class indexController {
 	public void setCardCount(@PathVariable("cardName") String cardName, @PathVariable("count") String count) {
 		TallyCard card = cardsService.getCardByName(cardName);
 		card.setCount(Integer.parseInt(count));
+		card.updateLastUpdated();
 		cardsService.saveCard(card);
 	}
 
