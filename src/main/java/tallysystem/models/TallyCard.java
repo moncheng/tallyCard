@@ -17,11 +17,13 @@ public class TallyCard implements Serializable{
 	private String name;
 	private int count;
 	private Date dateCreate;
+	private Date lastUpdate;
 	
 	public TallyCard(String name)
 	{
 		this.name=name;
 		this.dateCreate=new Date();
+		this.lastUpdate=this.dateCreate;
 		this.count=0;
 	}
 	public String getName()
@@ -48,6 +50,16 @@ public class TallyCard implements Serializable{
 	{
 		return this.dateCreate;
 	}
+	public Date getLastUpdated()
+	{
+		return this.lastUpdate;
+	}
+
+	public void updateLastUpdated()
+	{
+		this.lastUpdate=new Date();
+	}
+
 
 	public String toString()
 	{
