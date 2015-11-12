@@ -46,6 +46,11 @@ public class TallyCardService {
 		return mongoOperations.findAll(TallyCard.class);
 
 	}
+	public boolean nameExist(String name)
+	{
+		Query findName = createQuery("name",name);
+		return mongoOperations.exists(findName, TallyCard.class);
+	}
 	
 
 }

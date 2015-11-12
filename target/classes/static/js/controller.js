@@ -13,11 +13,13 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 	$scope.addCard = function() {
 		$http.post('http://localhost:8080/newCard/' + $scope.newName).success(
 				function(data, status, headers, config) {
+					alert("card added");
+					$scope.newName = "";
 					return $scope.tallyCards.push(data);
-				});
-
-		alert("card added")
-		$scope.newName = "";
+				}).error(function(){
+									alert("Name already existed, use other name.");
+									$scope.newName = "";
+									});
 
 	}
 

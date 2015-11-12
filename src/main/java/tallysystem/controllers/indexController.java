@@ -28,9 +28,19 @@ public class indexController {
 
 	@RequestMapping(value = "newCard/{cardName}", method = RequestMethod.POST)
 	public ResponseEntity<TallyCard> createNewCard(@PathVariable("cardName") String cardName) {
-		TallyCard card = new TallyCard(cardName);
-		cardsService.saveCard(card);
-		return new ResponseEntity<TallyCard>(card, new HttpHeaders(), HttpStatus.OK);
+		if(cardsService.nameExist(cardName))
+		{
+			HttpHeaders header=new HttpHeaders();
+			header.set("testing", "testValue");
+			return new ResponseEntity<TallyCard>(null,header,HttpStatus.NOT_ACCEPTABLE);
+		}
+		else
+		{
+			TallyCard card = new TallyCard(cardName);
+			cardsService.saveCard(card);
+			return new ResponseEntity<TallyCard>(card, new HttpHeaders(), HttpStatus.OK);
+		}
+
 	}
 
 	@RequestMapping(value = "getAllCards", method = RequestMethod.GET)
