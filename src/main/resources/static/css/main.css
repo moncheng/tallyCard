@@ -155,6 +155,10 @@ p {
 	padding:15px;
 
 }
+.display-none
+{
+	display:none;
+}
 .success {
 color: #4F8A10;
 background-color: #DFF2BF;

@@ -13,16 +13,14 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 	$scope.addCard = function() {
 		$http.post('http://localhost:8080/newCard/' + $scope.newName).success(
 				function(data, status, headers, config) {
-					alert("card added");
+					displayMsg("ok","Card: \""+$scope.newName+"\" added.");
 					$scope.newName = "";
 					return $scope.tallyCards.push(data);
 				}).error(function(){
-									alert("Name already existed, use other name.");
-									$scope.newName = "";
-									});
-
+					displayMsg("error","Name \""+$scope.newName+"\" already in used! please re-enter a new name.");
+					$scope.newName = "";
+					});
 	}
-
 	$scope.search = function() {
 		$scope.searchText = $("#searchName").val();
 	}
@@ -104,6 +102,28 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 	}
 
 });
+
+
+function displayMsg(status,text)
+{
+	$msgBox=$("#top-msg-box");
+	$msgIcon=$("#top-msg-icon");
+	$msg=$("#top-msg");
+	$msgBox.removeClass("error");
+	$msgBox.removeClass("success");
+	$msgIcon.removeClass("glyphicon-remove");
+	$msgIcon.removeClass("glyphicon-ok");
+	if(status==='ok'){
+			$msgBox.addClass("success");
+			$msgIcon.addClass("glyphicon-ok");
+		}
+	else{
+			$msgBox.addClass("error");
+			$msgIcon.addClass("glyphicon-remove");
+		}
+	$msg.text(text);
+	$msgBox.fadeIn('fast').delay(3000).fadeOut('slow');
+}
 
 function switchSort(id, groupId) {
 
