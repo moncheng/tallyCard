@@ -1,5 +1,5 @@
 var tallyApp = angular.module('tallyApp', []);
-var minCount = 0;
+var minCount = Number.NEGATIVE_INFINITY;
 var maxCount = Number.MAX_VALUE;
 
 tallyApp.controller('CardController', function($scope, $element, $http) {
@@ -32,7 +32,7 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 	$scope.submitCountRange = function() {
 
 		if ($("#minCount").val() === "")
-			minCount = 0;
+			minCount = Number.MIN_VALUE;
 		else
 			minCount = parseInt($("#minCount").val());
 		if ($("#maxCount").val() == "")
@@ -41,7 +41,7 @@ tallyApp.controller('CardController', function($scope, $element, $http) {
 			maxCount = parseInt($("#maxCount").val());
 	}
 	$scope.clearCountFliter = function() {
-		minCount = 0;
+		minCount = Number.MIN_VALUE;
 		maxCount = Number.MAX_VALUE;
 		$("#minCount").val("");
 		$("#maxCount").val("");
@@ -122,6 +122,9 @@ function displayMsg(status,text)
 			$msgIcon.addClass("glyphicon-remove");
 		}
 	$msg.text(text);
+	$msgBox.hide();
+	$msgBox.stop();
+	$msgBox.stop();
 	$msgBox.fadeIn('fast').delay(3000).fadeOut('slow');
 }
 
