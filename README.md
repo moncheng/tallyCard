@@ -3,6 +3,8 @@ A simple practice project that uses Spring and Angular frameworks. Tally System 
 
 
 ## Things to install
+  * Maven
+http://maven.apache.org/install.html
 
   * MongoDB
   	* Install
@@ -13,9 +15,10 @@ A simple practice project that uses Spring and Angular frameworks. Tally System 
 		* run `export PATH=$PATH:/data/db` to add path varible ( may need start new session of shell or restart terminal to take effect)
 
 	* Run
-		* simply run `mongod` may need to run with sudo if your user dont have root access.
-	* Running Mongo Shell
-		* `mongo`
+		* simply run `mongod`. (may need to run with sudo if your user dont have root access.)
+
+	* Running Mongo Shell (Optional) 
+		* `mongo` to start shell. then:
 			* `db` to check the database you are in use
 			default db called `test`
 			* `use <database>` to switch to different db.
@@ -23,21 +26,24 @@ A simple practice project that uses Spring and Angular frameworks. Tally System 
 			* `use myNewDB` to create new db.
 			*  `https://docs.mongodb.com/manual/mongo/` for more information.
 
-  * Maven
-http://maven.apache.org/install.html
+
 
 **optionals** 
 
   * home-brew 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-  * IDE, Sprint tool suite, Eclipse or others.
+  * IDE:
+  	* Sprint tool suite 
+  	* Eclipse 
+  	* IntelliJ (highly recommanded, you can get student free version or commutity free version)
+  	* any other that supports maven project.
 
 
 
 ## How to Run locally
 
 	1. Run `mongod` in terminal to run DB
-	2. Run `mvn clean package` and then `mvn spring-boot:run` in new terminal section to start application
-	3. Run `mongo` in new section to run mongo shell if you want to check Data.
-	4. Navigate to `localhost:8080` on browser.
+	2. Run `mvn clean package` and then `mvn spring-boot:run` under root directory of this project to start application
+	3. Run `mongo` to run mongo shell if you want to check Data.
+	4. Navigate to `localhost:8080` with web browser.
