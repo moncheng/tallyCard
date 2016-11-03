@@ -4,19 +4,19 @@ A simple practice project that uses Spring and Angular frameworks. Tally System 
 
 ## Things to install
 
--- MongoDB
+  * MongoDB
 
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
--- Maven
+  * Maven
 http://maven.apache.org/install.html
 
-optionals 
+**optionals** 
 
--- home-brew 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)
+  * home-brew 
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
--- IDE, Sprint tool suite, Eclipse or others.
+  * IDE, Sprint tool suite, Eclipse or others.
 
 
 
